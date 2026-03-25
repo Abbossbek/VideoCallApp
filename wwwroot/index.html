@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Video Call</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📹 WebRTC Video Call</h1>
+            <p class="subtitle">Real-time peer-to-peer video calling</p>
+        </header>
+
+        <!-- Connection Section -->
+        <section class="connection-section">
+            <div class="room-input-group">
+                <label for="roomId">Room ID</label>
+                <input type="text" id="roomId" placeholder="Enter room ID (e.g., room123)" autocomplete="off">
+                <button id="joinRoomBtn" class="btn btn-primary">Join Room</button>
+                <button id="leaveRoomBtn" class="btn btn-danger" disabled>Leave Room</button>
+            </div>
+            <div id="connectionStatus" class="status status-disconnected">
+                <span class="status-indicator"></span>
+                <span class="status-text">Disconnected</span>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="localVideo" autoplay muted playsinline></video>
+                    <div class="video-label">You</div>
+                </div>
+                <div class="video-wrapper">
+                    <video id="remoteVideo" autoplay playsinline></video>
+                    <div class="video-label">Remote</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call Controls Section -->
+        <section class="controls-section">
+            <div class="call-controls">
+                <button id="startCallBtn" class="btn btn-success" disabled>
+                    <span class="btn-icon">📞</span>
+                    <span class="btn-text">Start Call</span>
+                </button>
+                <button id="answerCallBtn" class="btn btn-success" disabled style="display: none;">
+                    <span class="btn-icon">✅</span>
+                    <span class="btn-text">Answer</span>
+                </button>
+                <button id="endCallBtn" class="btn btn-danger" disabled>
+                    <span class="btn-icon">📴</span>
+                    <span class="btn-text">End Call</span>
+                </button>
+            </div>
+
+            <div class="media-controls">
+                <button id="toggleVideoBtn" class="btn btn-secondary" disabled>
+                    <span class="btn-icon">📷</span>
+                    <span class="btn-text">Camera On</span>
+                </button>
+                <button id="toggleAudioBtn" class="btn btn-secondary" disabled>
+                    <span class="btn-icon">🎤</span>
+                    <span class="btn-text">Mic On</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Call Status Section -->
+        <section class="call-status-section">
+            <div id="callStatus" class="call-status">
+                <span class="call-status-text">Waiting to join a room...</span>
+            </div>
+            <div id="testModeIndicator" class="test-mode-indicator" style="display: none;">
+                ⚠️ Test Mode: Running without camera/microphone
+            </div>
+        </section>
+
+        <!-- Info Section -->
+        <section class="info-section">
+            <h3>How to use:</h3>
+            <ol>
+                <li>Enter a room ID and click "Join Room"</li>
+                <li>Share the room ID with the person you want to call</li>
+                <li>The first person to join becomes the caller</li>
+                <li>Click "Start Call" to initiate the video call</li>
+                <li>The second person will receive the call and can click "Answer"</li>
+                <li>Use the camera and microphone buttons to toggle during the call</li>
+            </ol>
+        </section>
+    </div>
+
+    <!-- SignalR Client Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
